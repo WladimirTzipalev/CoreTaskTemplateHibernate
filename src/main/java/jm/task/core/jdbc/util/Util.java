@@ -13,6 +13,7 @@ public class Util {
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName(DRIVER);
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
