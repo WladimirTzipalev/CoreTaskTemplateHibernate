@@ -18,5 +18,6 @@ public class Util {
             e.printStackTrace();
         }
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
     }
 }

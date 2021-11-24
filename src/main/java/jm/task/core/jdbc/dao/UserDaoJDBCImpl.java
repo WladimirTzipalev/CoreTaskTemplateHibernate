@@ -10,11 +10,14 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public UserDaoJDBCImpl() throws SQLException {
     }
+
     private Connection connection = Util.getConnection();
+
 
     public void createUsersTable() throws SQLException {
         System.out.println("Creating savepoint...");
         Savepoint savepointOne = connection.setSavepoint("SavepointOne");
+
         try {
             Statement state = connection.createStatement();
             connection.setAutoCommit(false);
@@ -32,6 +35,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
 
     public void dropUsersTable() {
+
         try {
             Statement statement = connection.createStatement();
             connection.setAutoCommit(false);
@@ -44,6 +48,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void saveUser(String name, String lastName, byte age) {
+
         try {
             Statement statement = connection.createStatement();
             connection.setAutoCommit(false);
@@ -57,6 +62,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) {
+
         try {
             Statement statement = connection.createStatement();
             connection.setAutoCommit(false);
@@ -68,7 +74,9 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+
     public List<User> getAllUsers() {
+
         List<User> userList = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
@@ -90,7 +98,8 @@ public class UserDaoJDBCImpl implements UserDao {
         return userList;
     }
 
-    public void cleanUsersTable() {
+    public void cleanUsersTable() throws SQLException {
+
         try {
             Statement statement = connection.createStatement();
             connection.setAutoCommit(false);
@@ -102,3 +111,8 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 }
+
+
+
+
+

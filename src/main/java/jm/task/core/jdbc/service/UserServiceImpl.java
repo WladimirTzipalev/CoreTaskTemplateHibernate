@@ -13,9 +13,6 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl() throws SQLException, ClassNotFoundException {
     }
 
-
-
-
     public void createUsersTable() throws SQLException {
         userDao.createUsersTable();
     }
@@ -36,7 +33,7 @@ public class UserServiceImpl implements UserService {
         return userDao.getAllUsers();
     }
 
-    public void cleanUsersTable() {
+    public void cleanUsersTable() throws SQLException {
         userDao.cleanUsersTable();
     }
 }
