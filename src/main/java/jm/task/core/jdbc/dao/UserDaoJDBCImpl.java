@@ -15,8 +15,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
 
     public void createUsersTable() throws SQLException {
-        System.out.println("Creating savepoint...");
-        Savepoint savepointOne = connection.setSavepoint("SavepointOne");
+
+        Savepoint savepoint = connection.setSavepoint("Savepoint");
 
         try {
             Statement state = connection.createStatement();
@@ -29,12 +29,12 @@ public class UserDaoJDBCImpl implements UserDao {
 
         } catch (SQLException e) {
             System.out.println("Unable to create user table: " + e);
-            connection.rollback(savepointOne);
+            connection.rollback(savepoint);
         }
     }
 
 
-    public void dropUsersTable() {
+    public void dropUsersTable() throws SQLException {
 
         try {
             Statement statement = connection.createStatement();
@@ -44,10 +44,11 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
     }
 
-    public void saveUser(String name, String lastName, byte age) {
+    public void saveUser(String name, String lastName, byte age) throws SQLException {
 
         try {
             Statement statement = connection.createStatement();
@@ -58,10 +59,11 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
     }
 
-    public void removeUserById(long id) {
+    public void removeUserById(long id) throws SQLException {
 
         try {
             Statement statement = connection.createStatement();
@@ -71,11 +73,12 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
     }
 
 
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers() throws SQLException {
 
         List<User> userList = new ArrayList<>();
         try {
@@ -94,6 +97,7 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
         return userList;
     }
@@ -108,6 +112,7 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
     }
 }
